@@ -900,7 +900,9 @@ body {
 .envelope-wrapper.open .letter-paper {
     transform: translateY(-210px);
     z-index: 5;
-    min-height: 520px;
+    min-height: 480px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .paper-content {
@@ -1235,5 +1237,15 @@ body {
 @media (max-width: 600px) {
     .hero-main-title { font-size: 2rem; }
     .envelope-wrapper { width: 95%; }
+    .envelope-wrapper.open { margin-bottom: 340px; }
+    .envelope-wrapper.open .letter-paper {
+        transform: translateY(-190px);
+        min-height: 420px;
+        padding: 24px 18px;
+    }
+    .typewriter-body {
+        font-size: 1.15rem;
+        line-height: 1.5;
+    }
     #fireworks-hb-text { font-size: 1.5rem; }
 }
