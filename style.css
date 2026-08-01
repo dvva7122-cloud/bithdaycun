@@ -534,6 +534,7 @@ body {
     border: 1px dashed rgba(255, 94, 156, 0.35);
     border-radius: 24px;
     box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.6);
+    overflow: hidden;
 }
 
 .string-rail {
@@ -564,18 +565,36 @@ body {
 
 #photo-hang-row {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 20px;
-    padding-top: 30px;
-    min-height: 250px;
+    padding: 35px 20px 20px 20px;
+    min-height: 240px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Thanh cuộn ngang xinh xắn */
+#photo-hang-row::-webkit-scrollbar {
+    height: 6px;
+}
+#photo-hang-row::-webkit-scrollbar-track {
+    background: rgba(255, 94, 156, 0.1);
+    border-radius: 10px;
+}
+#photo-hang-row::-webkit-scrollbar-thumb {
+    background: rgba(255, 94, 156, 0.4);
+    border-radius: 10px;
 }
 
 /* Thẻ Polaroid treo dây */
 .hang-photo {
     position: relative;
-    width: 165px;
+    flex: 0 0 155px;
+    width: 155px;
     background: #FFFFFF;
     border-radius: 6px;
     padding: 10px 10px 14px 10px;
@@ -819,9 +838,24 @@ body {
     padding: 32px 28px;
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), min-height 0.8s ease;
     z-index: 2;
-    overflow: visible;
+    overflow: hidden;
     box-shadow: 0 12px 32px rgba(0,0,0,0.1);
     height: auto;
+}
+
+.paper-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease 0.3s;
+}
+
+.envelope-wrapper.open .paper-content {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Nút đóng lá thư */
