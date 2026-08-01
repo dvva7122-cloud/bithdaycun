@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday | Trang Web Bí Mật Dành Riêng Cho Em 🎂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <!-- Canvas overlay for fireworks & floating particles -->
+    <canvas id="fx-canvas"></canvas>
+    
+    <!-- Heart cursor follower -->
+    <div id="cursor-sparkle">💗</div>
+
+    <!-- Lightbox Overlay for Polaroid Photos -->
+    <div id="lightbox-overlay" class="hidden">
+        <button id="lightbox-close">✕</button>
+        <img id="lightbox-img" src="" alt="">
+        <div id="lightbox-caption"></div>
+    </div>
+
+    <!-- Background Aurora Animated Gradients & Floating Elements -->
+    <div id="floating-decorations">
+        <!-- Floating hearts & cherry blossoms populated dynamically -->
+    </div>
+
+    <!-- ================= SECTION 1: LOADING SCREEN ================= -->
+    <div id="boot-screen" class="active">
+        <div class="boot-box glass-panel">
+            <div class="boot-logo">🎂</div>
+            <h1 class="boot-title">Happy Birthday</h1>
+            <div class="boot-status" id="boot-status-text">Đang khởi tạo...</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="boot-progress"></div>
+            </div>
+            <p class="boot-subtext">Dành riêng cho một người cực kỳ đặc biệt ❤️</p>
+        </div>
+    </div>
+
+    <!-- Main OS Application Wrapper -->
+    <div id="os-root" class="hidden">
+        
+        <!-- Fake MacOS Browser Header -->
+        <header class="browser-header glass-panel">
+            <div class="window-controls">
+                <span class="btn-close"></span>
+                <span class="btn-minimize"></span>
+                <span class="btn-expand"></span>
+            </div>
+            <div class="address-bar">
+                <span class="lock-icon">🔒</span>
+                <span class="url-text">https://birthday.os/mon-qua-bi-mat-cho-em</span>
+            </div>
+            <div class="header-actions">
+                <button id="music-toggle-btn" class="icon-btn" title="Bật/Tắt Nhạc">🎵</button>
+            </div>
+        </header>
+
+        <main class="content-container">
+
+            <!-- ================= HERO SECTION ================= -->
+            <section id="hero-section" class="hero-container">
+                <div class="hero-card glass-panel main-hero-card tilt-card" id="hero-tilt-card">
+                    <div class="hero-top-badge">
+                        <span>Chúc mừng sinh nhật em nhaaa!!! ✨</span>
+                    </div>
+
+                    <div class="hero-sticker-wrapper">
+                        <img src="bear.jpg" alt="Cutie Bear" class="hero-sticker-img">
+                        <div class="sticker-sparkles">💖 ✨ 🎈</div>
+                    </div>
+
+                    <p class="hero-subtitle">Chào em!</p>
+                    <h1 class="hero-main-title"><span class="highlight-text">Chúc mừng ngày của Em.</span> 🎂</h1>
+
+                    <div class="hero-btn-group">
+                        <button id="btn-show-me" class="primary-gradient-btn glow-effect">
+                            <span>Mở ra xem ngay!</span> 🎉
+                        </button>
+                    </div>
+                </div>
+
+                <!-- VisionOS Opening Modal Simulation -->
+                <div id="vision-modal" class="vision-overlay hidden">
+                    <div class="vision-card glass-panel">
+                        <div class="vision-icon">🧸</div>
+                        <h3>Đang chuẩn bị điều bất ngờ cho em...</h3>
+                        <div class="vision-loader">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Content Revealed After Hero Click -->
+            <div id="main-experience" class="hidden-fade">
+
+                <!-- ================= SECTION 2: DIGITAL GIFT BOX ================= -->
+                <section class="section-wrapper" id="section-gift">
+                    <h2 class="section-title">Hộp quà của em ❤️</h2>
+                    <p class="section-desc">Bấm vào hộp quà để bung tỏa những khoảnh khắc đáng yêu nhé!</p>
+                    
+                    <div class="gift-box-container">
+                        <div class="gift-box" id="3d-gift-box">
+                            <div class="gift-lid">
+                                <div class="lid-ribbon"></div>
+                            </div>
+                            <div class="gift-body">
+                                <div class="body-ribbon"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo String Theater -->
+                    <div id="gift-rewards-modal" class="rewards-pop hidden">
+                        <div id="photo-theater">
+                            <!-- Dây + đèn -->
+                            <div class="string-rail" id="string-rail"></div>
+                            <!-- Ảnh treo -->
+                            <div id="photo-hang-row" style="position:relative; height:260px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= SECRET LETTER ================= -->
+                <section class="section-wrapper" id="section-letter">
+                    <h2 class="section-title">Thư tới em ✉️</h2>
+                    <p class="section-desc">Bấm vào con dấu sáp để mở bức thư ra nhé 💌</p>
+
+                    <div class="envelope-wrapper" id="envelope-trigger">
+                        <div class="envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="envelope-pocket"></div>
+                            <!-- Wax Seal -->
+                            <div class="wax-seal" id="wax-seal">💌</div>
+                            <div class="letter-paper glass-panel" id="letter-paper">
+                                <button class="letter-close-btn" id="letter-close-btn">&times;</button>
+                                <div class="paper-content">
+                                    <h3 class="handwriting-header">Gửi Cún,</h3>
+                                    <div class="typewriter-body" id="letter-typewriter-text"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Decorative candles beside letter -->
+                    <div class="candle-decor-wrapper" id="candle-decor-row">
+                        <div class="candle-decor">
+                            <div class="candle-decor-smoke"></div>
+                            <div class="candle-decor-flame"></div>
+                            <div class="candle-decor-body"></div>
+                        </div>
+                        <div class="candle-decor">
+                            <div class="candle-decor-smoke"></div>
+                            <div class="candle-decor-flame"></div>
+                            <div class="candle-decor-body"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= BIRTHDAY WISHES ================= -->
+                <section class="section-wrapper" id="section-cake">
+                    <h2 class="section-title">Điều ước của em ⭐</h2>
+                    
+                    <div id="stars-wish-stage">
+                        <p class="section-desc">Bấm vào ngôi sao lấp lánh để bắt đầu cầu nguyện</p>
+                        <div class="glowing-star" id="wish-star">⭐</div>
+                    </div>
+
+                    <div id="countdown-wish-stage" class="hidden">
+                        <h3 class="wish-instruction">Nhắm mắt lại... Đếm ngược nào!</h3>
+                        <div class="big-countdown-number" id="countdown-num">5</div>
+                    </div>
+                </section>
+
+                <!-- ================= LUCKY MACHINE ================= -->
+                <section class="section-wrapper" id="section-gacha">
+                    <h2 class="section-title">Vòng Quay May Mắn 🎰</h2>
+                    <p class="section-desc">Thử vận may sinh nhật xem em trúng quà gì nhé!</p>
+
+                    <div class="gacha-machine-card glass-panel">
+                        <div class="slot-display">
+                            <div class="slot-window" id="slot-1">❤️</div>
+                            <div class="slot-window" id="slot-2">🍰</div>
+                            <div class="slot-window" id="slot-3">🎁</div>
+                        </div>
+                        <button id="spin-gacha-btn" class="primary-gradient-btn glow-effect">Quay Ngay! 🎲</button>
+
+                        <div id="gacha-result" class="gacha-win-msg hidden glass-panel">
+                            <h3>🎉 CHÚC MỪNG EM!</h3>
+                            <p id="gacha-prize-text">MỘT CÁI ÔM THẬT CHẶT 🤗</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= FINAL SECTION: OUTRO ================= -->
+                <footer class="footer-wrapper">
+                    <div class="outro-box glass-panel tilt-card">
+                        <h2>Cảm ơn em vì đã xuất hiện trên đời.</h2>
+                        <h1 class="outro-hb">Chúc Mừng Sinh Nhật ❤️</h1>
+                        <div class="footer-credit">
+                            Được làm dành riêng cho<br>
+                            <strong>Cún</strong>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Wish Accepted Overlay Modal -->
+    <div id="wish-accepted-screen" class="full-overlay hidden">
+        <div class="accepted-content">
+            <span class="sparkle-icon">✨</span>
+            <h1>Điều Ước Đã Được Nhận</h1>
+            <div id="fireworks-hb-text">HAPPY BIRTHDAY EM ❤️</div>
+            <p style="margin-top:16px; font-size:1.1rem; color:rgba(255,255,255,0.85); font-weight:600;">Chắc chắn mọi mong ước của em đều sẽ trở thành hiện thực! 🎆</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
